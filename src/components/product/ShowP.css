@@ -1,0 +1,37 @@
+.container{
+    margin-top: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap:wrap;
+    gap: 1.3rem;
+    margin-bottom: 5rem;
+}
+img{
+    height: 17rem;
+}
+.card{
+    height: 25.6rem;
+    width: 16.3rem ;
+    border-radius: 0px!important;
+    border: none;
+    box-shadow: 0 0 5px 0px rgba(150, 150, 150, 0.3);
+}
+.btn{
+    width: 6.5rem !important;
+}
+.btn1{
+    margin-right: .5rem;
+}
+
+.img2{
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    transition: .3s ease-in;
+}
+.img2:hover{
+    opacity: 0.2;
+    cursor: pointer;
+    border-radius: 0px;
+  }

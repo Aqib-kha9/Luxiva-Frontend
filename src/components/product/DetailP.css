@@ -1,0 +1,37 @@
+.Detail{
+    display: flex;
+    margin-left: 4.5rem;
+    margin-right: 4.5rem;
+    margin-top: 4.5rem;
+    /* align-items: center; */
+    justify-content: center;
+    /* border: 1px solid black; */
+}
+.left{
+    border: 1px solid rgba(155, 154, 154, 0.685);
+    margin-right: 1rem;
+    padding: .7rem;
+   
+   
+}
+
+.left img{
+    height: 35rem;
+    transition: transform .2s;
+    
+
+}
+/* img:hover{
+    transform: scale(1.5);
+} */
+.right{
+    width: 50%;
+    line-height: 2rem;
+}
+.btn-related{
+    width: 15rem!important;
+}
+.btnbox{
+    display: flex;
+    justify-content: space-evenly;
+}

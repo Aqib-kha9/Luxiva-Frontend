@@ -1,0 +1,25 @@
+.parent-register{
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+}
+
+.container_register{
+    width: 37.5rem;
+    box-shadow: 0 0 5px 0px rgba(150, 150, 150, 0.3);
+    padding: 2rem;
+}
+.form-control{
+    padding: .6rem;
+    margin-bottom: 1.5rem !important;
+}
+.btn-register{
+    width: 100% !important;
+    border: 2px solid red;
+    font-weight: bold;
+    padding: .5rem;
+}
+
+.shipping-container{
+    width: 50rem!important;
+}

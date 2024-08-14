@@ -1,0 +1,81 @@
+.nav{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 5rem;
+   box-shadow: 0 0 5px 0px rgba(150, 150, 150, 0.3);
+   background-color: white;
+   
+}
+.nav_bar{
+    display: flex;
+    width: 88%;
+    justify-content: space-between;
+    align-items: center;
+}
+.right_nav a{
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 2rem;
+    color: black;
+}
+
+.right_nav a:hover{
+    color: red;
+    cursor: pointer;
+}
+.right_nav a:hover{
+    color: red;
+    cursor: pointer;
+}
+.search_bar{
+    display: flex;
+    align-items: center;
+    border: 2px solid rgba(109, 105, 105, 0.651);
+    border-radius: 1rem;
+    width: 25rem;
+    padding: .3rem;
+    transition: .3s ease-in;
+}
+
+.search_bar input {
+    all: unset;
+    width: 100%;
+    margin-left: .8rem;
+}
+.left_bar{
+    text-decoration: none;
+    color: black;
+    
+}
+.left_bar h3:hover{
+    color: red;
+    cursor: pointer;
+}
+
+.search_bar:hover{
+    border: 2px solid red;
+}
+
+/* .sub_bar{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 1rem;
+    box-shadow: 0 0 5px 0px rgba(150, 150, 150, 0.3);
+
+    
+}
+.items{
+    margin-left: 2rem;
+}
+
+.items:hover{
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+} */
+
+.cart_a{
+    left: 1rem;
+}
