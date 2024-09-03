@@ -1,0 +1,19 @@
+.parent-footer-links{
+    height: 25rem;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.945);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    line-height: 2rem;
+}
+
+.brand-name{
+    width: 13rem;
+}
+
+li{
+    list-style-type: none;
+    line-height: 2rem;
+}

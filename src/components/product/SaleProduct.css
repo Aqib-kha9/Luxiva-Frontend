@@ -1,0 +1,45 @@
+.sale-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30rem;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+}
+.backgroundimg{
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.inner-sale{
+    height: 320px;
+    width:  540px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.side-container{
+    margin-right: 2rem;
+}
+.side-container p{
+    font-weight: bold;
+}
+
+.side-container h2{
+    font-weight: bold;
+}
+
+.side-container a{
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+}
+
+:hover.side-container a{
+    color: red;
+    text-decoration: underline;
+}

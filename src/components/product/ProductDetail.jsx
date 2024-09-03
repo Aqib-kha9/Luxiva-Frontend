@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import './DetailP.css';
+import "./DetailP.css";
 import RelatedProduct from "./RelatedProduct";
+import Review from "./ReviewShow";
+import AppContext from "../../context/AppContext";
 
 const ProductDetail = () => {
   const [product, setProduct] = useState();
-  const url = "http://localhost:8080/api";
+  const [productReview, setProductReview] = useState();
+  const {user} = useContext(AppContext);
+  // const url = "http://localhost:8080/api";
+  const url = "https://luxiva-backend-api.onrender.com/api";
 
   const { id } = useParams();
+  const {token,reload} = useContext(AppContext);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -24,7 +30,23 @@ const ProductDetail = () => {
     };
 
     fetchProduct();
-  }, [id]);
+  }, [id,reload]);
+
+  useEffect(() => {
+    const fetchProductReview = async () => {
+      const api = await axios.get(`${url}/product/${id}/all`, {
+        headers: {
+          "Content-Type": "Application/json",
+          Auth: token
+        },
+        withCredentials: true,
+      });
+      // console.log(api.data.getAllReviews);
+      setProductReview(api.data.getAllReviews);
+    };
+
+    fetchProductReview();
+  }, [id,token]);
 
   return (
     <>
@@ -34,24 +56,51 @@ const ProductDetail = () => {
         </div>
         <div className="right">
           <h3>{product?.title}</h3>
-          <h5 style={{color:"red"}}>
-            <b>&#8377;{product?.price.toLocaleString("en-IN")}</b>
-          </h5>
-          <p style={{fontWeight:"600", color:"#687188"}}>{product?.description}</p>
-          <p><b><span style={{color:"#687188"}}>Category:</span> {product?.category}</b></p>
-          <p><b><span style={{color:"#687188"}}>Stocks: </span>{product?.qty}</b></p>
+          <span style={{ color: "red", fontWeight: "bold" }}>
+            &#8377;{product?.price?.toLocaleString("en-IN")}
+          </span>
+          &nbsp;
+          <span style={{ textDecoration: "line-through", fontSize: "small" }}>
+            &#8377;{product?.oldPrice?.toLocaleString("en-IN")}
+          </span>
+          &nbsp; &nbsp;
+          <span style={{ color: "green" }}>{product?.percentOff}% Off</span>
+          <p style={{ fontWeight: "600", color: "#687188" }}>
+            {product?.shortDescription}
+          </p>
+          <p><i className="fa-solid fa-shield-heart"></i> {product?.warranty}</p>
+          <p><i className="fa-solid fa-arrow-rotate-left"></i> {product?.returnPolicy}</p>
+          <p><i className="fa-solid fa-sack-dollar"></i> {product?.paymentMethod}</p>
+          <p>Color {product?.color}</p>
+          <p>Size {product?.size[0]},{product?.size[1]},{product?.size[2]}</p>
+          
           <hr />
           <div className="btnbox">
-          <button className="btn btn-related btn-outline-danger ">Buy Now</button>
-          <button className="btn btn-related btn-outline-dark">Add To Cart</button>
+            <button className="btn btn-related btn-outline-danger ">
+              Buy Now
+            </button>
+            <button className="btn btn-related btn-outline-dark">
+              Add To Cart
+            </button>
           </div>
-          <hr />        
+          <hr />
+          <p>
+            <b>
+              <span style={{ color: "#687188" }}>Category:</span>{" "}
+              {product?.category}
+            </b>
+          </p>
+          <p>
+            <b>
+              <span style={{ color: "#687188" }}>Stocks: </span>
+              {product?.qty}
+            </b>
+          </p>
           {/* <p>{product?.createdAt}</p> */}
         </div>
-        
       </div>
-
-      <RelatedProduct category={product?.category}/>
+      <Review product={product} />
+      <RelatedProduct category={product?.category} />
     </>
   );
 };

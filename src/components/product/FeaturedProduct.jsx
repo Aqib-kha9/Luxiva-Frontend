@@ -1,23 +1,67 @@
-import React, { useContext, useEffect, useState } from 'react'
-import AppContext from '../../context/AppContext'
-import { Link } from 'react-router-dom'
+import React, { useContext } from "react";
+import AppContext from "../../context/AppContext";
+import { useState } from "react";
+import "./FeaturedProduct.css";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import "./ShowP.css"
+import Slider from "react-slick";
+import { Link } from "react-router-dom";
 
-const RelatedProduct = ({category}) => {
-    const {products} = useContext(AppContext)
-    const [relatedProduct, setRelatedProduct] = useState([])
-    useEffect(() => {
-      setRelatedProduct(products.filter((data)=>data?.category?.toLowerCase() == category?.toLowerCase()))
-    }, [category,products])
-    
+const FeaturedProduct = () => {
+  const { productType, addToCart } = useContext(AppContext);
+
+ 
+
+  
+  const settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
 
   return (
     <>
-        <hr />
-        <h3 className='text-center mt-3'>Related Products</h3>
 
-          <div className="container scrollbox" style={{justifyContent:"start",flexWrap: "nowrap",overflowY: "auto",gap:"1.5rem"}}>
-          
-            {relatedProduct?.map((product) => (
+      {productType.length > 0 ? (
+        <div>
+          <h1 style={{ textAlign: "center" }}>Featured Products</h1>
+        </div>
+      ) : (
+        <p></p>
+      )}
+        <div className="container scrollbox" style={{justifyContent:"start",flexWrap: "nowrap",overflowY: "auto",gap:"1.5rem"}}>
+          {productType?.length > 0 ? (
+            productType?.map((product) => (
               <div key={product._id} className="card-body-featured">
                 
                   
@@ -86,11 +130,13 @@ const RelatedProduct = ({category}) => {
                   
               </div>
             ))
-          }
-          
-         </div>
+          ) : (
+            <p>No Featured Products Available</p>
+          )}
+        </div>
+     
     </>
-  )
-}
+  );
+};
 
-export default RelatedProduct
+export default FeaturedProduct;

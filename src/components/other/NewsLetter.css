@@ -1,0 +1,42 @@
+.newsLetter-parent{
+    height: 150px;
+    width: 100vw;
+    background-color: #FF324D !important;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+}
+.form-div input{
+    height: 3.2rem;
+    width: 25rem;
+    border: 0px;
+    font-size: larger;
+    padding: .8rem;
+}
+.form-div button{
+    background: black;
+    padding: .8rem;
+    font-size: larger!important;
+    height: 3.2rem;
+    width: 10rem;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+.form-div input[type=text] {
+    border: 0px!important;
+  }
+
+.form-div input:focus {
+    border: 0px solid green!important;
+}
+
+.form-div button:hover{
+    border: 1px solid white;
+}
+

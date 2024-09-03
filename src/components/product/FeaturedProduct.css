@@ -1,0 +1,57 @@
+/* ::-webkit-scrollbar{
+    width: 10px;
+    height: 10px;
+} */
+
+/* @supports (scrollbar-color: auto) {
+    .scrollbox {
+      scrollbar-color: red white!important;
+    }
+
+  }
+
+  .scrollbox::-webkit-scrollbar{
+    width: 10px!important;
+    height: 8px!important;
+    background-color: red!important; /* or add it to the track */
+
+
+/* width */
+/* ::-webkit-scrollbar {
+    width: 3px!important;
+    height: 3px;
+  }
+  
+  /* Track */
+  /* ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  } */
+  
+  /* Handle */
+  /* ::-webkit-scrollbar-thumb {
+    background: grey;
+  }
+   */
+  /* Handle on hover */
+  /* ::-webkit-scrollbar-thumb:hover {
+    background: red;
+  } */ 
+
+
+  /* width */
+::-webkit-scrollbar {
+    width: 2px;
+    height: 3px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px red;
+    border-radius: 10px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 10px;
+  }

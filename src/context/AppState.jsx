@@ -9,12 +9,18 @@ const AppState = (props) => {
   const url = "https://luxiva-backend-api.onrender.com/api";
 
   const [products, setProducts] = useState([]);
+  const [bannerProducts, setBannerProducts] = useState([]);
+  const [saleProducts, setSaleProducts] = useState([]);
   const [token, setToken] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState();
   const [cart, setCart] = useState([]);
   const [reload, setReaload] = useState(false);
   const [userAddress, setUserAddress] = useState("");
+  const [productType, setProductType] = useState(false);
+  const [testimonials, setTestimonials] = useState([]);
+  const userId = user?._id;
+  // console.log(userId);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -24,7 +30,7 @@ const AppState = (props) => {
         },
         withCredentials: true,
       });
-      console.log(api.data.products);
+      // console.log(api.data.products);
       setProducts(api.data.products);
       profile();
       userCart();
@@ -34,6 +40,80 @@ const AppState = (props) => {
     fetchProduct();
   }, [token,reload]);
 
+
+//fetch Banner Product
+
+  useEffect(() => {
+    const fetchBannerProduct = async () => {
+      const api = await axios.get(`${url}/product/banner/all`, {
+        headers: {
+          "Content-Type": "Application/json",
+        },
+        withCredentials: true,
+      });
+      setBannerProducts(api.data.products);
+      
+    };
+    fetchBannerProduct();
+  }, [token,reload]);
+
+// fetch Sale Product
+  useEffect(() => {
+    const fetchSaleProduct = async () => {
+      const api = await axios.get(`${url}/product/sale/all`, {
+        headers: {
+          "Content-Type": "Application/json",
+        },
+        withCredentials: true,
+      });
+      // console.log(api.data.products);
+      setSaleProducts(api.data.products);
+    };
+    fetchSaleProduct();
+  }, [token, reload]);
+
+  // fetch product based on product type
+
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const api = await axios.get(`${url}/product/all`, {
+          headers: {
+            "Content-Type": "Application/json",
+          },
+          withCredentials: true,
+        });
+
+        const featuredProducts = api.data.products.filter((product) => product.productType === "Featured");
+
+        setProductType(featuredProducts);
+
+        // console.log(featuredProducts);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    fetchProduct();
+  }, [token, reload]); 
+
+  // fetch Testimonials 
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      const api = await axios.get(`${url}/product/testimonial/all`, {
+        headers: {
+          "Content-Type": "Application/json",
+        },
+        withCredentials: true,
+      });
+      // console.log(api.data.testimonial);
+      setTestimonials(api.data.testimonial);
+    };
+    fetchTestimonials();
+  },[token, reload] );
+
+
   useEffect(() => {
     let lstoken = localStorage.getItem("token");
     if (lstoken) {
@@ -41,6 +121,9 @@ const AppState = (props) => {
       setIsAuthenticated(true);
     }
   }, []);
+
+
+
 
   //register user
 
@@ -303,14 +386,76 @@ const AppState = (props) => {
       },
       withCredentials: true,
     });
-    console.log("user Address",api.data.userAddress);
+    // console.log("user Address",api.data.userAddress);
     setUserAddress(api.data.userAddress);
   };
+
+
+  // News Letter
+  const newsLetter = async (email) => {
+    const api = await axios.post(`${url}/newsletter/add`,{email},{
+      headers: {
+        "Content-Type": "Application/json",
+      },
+      withCredentials: true,
+    });
+    setReaload(!reload);
+    toast.success(api.data.message, {
+      position: "top-center",
+      autoClose: 1494,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
+    return api.data;
+  };
+
+
+ // Delete Review
+ const deleteReview = async (reviewProductId,reviewId) =>{
+  console.log(userId);
+  const api = await axios.delete(`${url}/product/${reviewProductId}/${reviewId}?userId=${userId}`,{
+    headers:{
+      "Content-Type":"Appliction/json",
+      Auth: token,
+    },
+    // userId: {userId} ,
+    withCredentials:true,
+  });
+  console.log(api.data);
+  setReaload(!reload);
+
+  toast.success(api.data.message, {
+    position: "top-center",
+    autoClose: 1494,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    transition: Bounce,
+  });
+ }
+
+
+
+
 
   return (
     <AppContext.Provider
       value={{
+        
         products,
+        bannerProducts,
+        saleProducts,
+        productType,
+        testimonials,
+        newsLetter,
         register,
         login,
         url,
@@ -326,6 +471,8 @@ const AppState = (props) => {
         clearCart,
         shippingAddress,
         userAddress,
+        deleteReview,
+        reload,
       }}
     >
       {props.children}

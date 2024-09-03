@@ -1,0 +1,45 @@
+.backgroundImg{
+    height: 80vh;
+    display: flex;
+    align-items: center;
+}
+
+.head-banner{
+    width: 90vw;
+    height: 80vh;
+}
+
+.slider-container{
+    display: flex;
+    flex-direction: column;
+}
+.slick-next{
+    right: 10px!important;
+    left: 10px!important;
+}
+.slick-prev{
+    right: 10px;
+}
+
+.side-containt{
+    
+    margin-left: 5rem;
+}
+
+.side-containt p{
+    font-size: 18px;
+    font-weight: 500;
+}
+.side-containt h1{
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.side-containt .btn{
+    width: 10rem!important;
+    font-weight: bold;
+    border: 2px solid red;
+    border-radius: 0px;
+    margin-top: 1rem;
+    height: 3rem!important;
+}

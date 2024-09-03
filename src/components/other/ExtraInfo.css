@@ -1,0 +1,40 @@
+.parent-info{
+    height: 20rem;
+    margin-bottom: 2.5rem;
+    display: flex;
+    justify-content: center;
+
+}
+.inner-info{
+    width: 90vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .2rem;
+    font-family: sans-serif;
+}
+.free-delivery{
+    width: 100%;
+    border-right: 1px solid grey;
+    border-left: 1px solid grey;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-radius: 10rem;
+}
+.return{
+    width: 100%;
+    border-right: 1px solid grey;
+    border-left: 1px solid grey;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-radius: 10rem;
+}
+.support{
+    width: 100%;
+    border-right: 1px solid grey;
+    border-left: 1px solid grey;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-radius: 10rem;
+}
+
