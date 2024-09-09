@@ -3,12 +3,8 @@ import AppContext from "./AppContext";
 import axios from "axios";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useParams } from 'react-router-dom';
-
 const AppState = (props) => {
-  const url = "http://localhost:8080/api";
-  // const url = "https://luxiva-backend-api.onrender.com/api";
-
+  const url = import.meta.env.VITE_API_URL
   const [products, setProducts] = useState([]);
   const [bannerProducts, setBannerProducts] = useState([]);
   const [saleProducts, setSaleProducts] = useState([]);
@@ -180,7 +176,7 @@ const AppState = (props) => {
       theme: "light",
       transition: Bounce,
     });
-    console.log("user login", api.data);
+    // console.log("user login", api.data);
     setToken(api.data.token);
     setIsAuthenticated(true);
 
@@ -235,7 +231,7 @@ const AppState = (props) => {
       }
     );
     setReaload(!reload);
-    console.log("My Cart", api);
+    // console.log("My Cart", api);
     toast.success(api.data.message, {
       position: "top-center",
       autoClose: 1494,
@@ -279,7 +275,7 @@ const AppState = (props) => {
     });
     // setCart(api.data.cart);
     setReaload(!reload);
-    console.log("decrease qty", api);
+    // console.log("decrease qty", api);
     // setUser(api.data.user);
     toast.success(api.data.message, {
       position: "top-center",
@@ -306,7 +302,7 @@ const AppState = (props) => {
     });
     // setCart(api.data.cart);
     setReaload(!reload);
-    console.log("remove item form cart", api);
+    // console.log("remove item form cart", api);
     // setUser(api.data.user);
     toast.success(api.data.message, {
       position: "top-center",
@@ -428,7 +424,7 @@ const AppState = (props) => {
     // userId: {userId} ,
     withCredentials:true,
   });
-  console.log(api.data);
+  // console.log(api.data);
   setReaload(!reload);
 
   toast.success(api.data.message, {
@@ -444,19 +440,7 @@ const AppState = (props) => {
   });
  }
 
-
- // Review ADD
-
-//  const  = async (productId,comment,rating,imgSrc)=>{
-//     const api = await axios.post(`${api}/product/${productId}`,{comment,rating,imgSrc},{
-//       headers:{
-//         "Content-Type":"Application/json",
-//         Auth: token
-//       },
-//       withCredentials: true,
-//     });
-//     console.log(api);
-//   }
+ // Add review
 
   const reviewAdd = async (productId,comment,rating,imgSrc,name) => {
     console.log(productId);
@@ -472,7 +456,7 @@ const AppState = (props) => {
     });
     
     setReaload(!reload);
-    console.log("review added", response);
+    // console.log("review added", response);
     toast.success(response.data.message, {
       position: "top-center",
       autoClose: 1494,
@@ -493,7 +477,6 @@ const AppState = (props) => {
   return (
     <AppContext.Provider
       value={{
-        
         products,
         bannerProducts,
         saleProducts,

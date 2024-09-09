@@ -5,7 +5,6 @@ import AppContext from "../../context/AppContext";
 import { useParams } from 'react-router-dom';
 
 const AddReview = () => {
-//   const [value, setValue] = React.useState(1);
   const { reviewAdd } = useContext(AppContext);
   const  productId = useParams();
   
@@ -27,7 +26,7 @@ const AddReview = () => {
     
     // console.log(`this is the product id = ${productId.id}`);
     const result = await reviewAdd(productId.id,comment,rating,imgSrc,name);
-    console.log(formData);
+    // console.log(formData);
     setFormData({
         comment: "",
         rating: "",

@@ -14,9 +14,7 @@ import AddReview from "./AddReview";
 const Review = ({ product }) => {
   const [productReview, setProductReview] = useState();
   const [showDescription, setShowDescription] = useState(true);
-  const { user, deleteReview, reload } = useContext(AppContext);
-  const url = "http://localhost:8080/api";
-  // const url = "https://luxiva-backend-api.onrender.com/api";
+  const { user, deleteReview, reload,url } = useContext(AppContext);
 
 
 

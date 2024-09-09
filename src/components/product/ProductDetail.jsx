@@ -10,10 +10,8 @@ import AppContext from "../../context/AppContext";
 const ProductDetail = () => {
   const [product, setProduct] = useState();
   const [productReview, setProductReview] = useState();
-  const { user } = useContext(AppContext);
-  const url = "http://localhost:8080/api";
-  // const url = "https://luxiva-backend-api.onrender.com/api";
-
+  const { user,url } = useContext(AppContext);
+  
   const { id } = useParams();
   const { token, reload, addToCart } = useContext(AppContext);
 

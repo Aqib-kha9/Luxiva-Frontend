@@ -28,7 +28,7 @@ const Address = () => {
     if (result.success) {
       navigate("/checkout");
     }
-    console.log(formData);
+    // console.log(formData);
     setFormData({
       fullName: "",
       address: "",

@@ -1,53 +1,12 @@
 import React, { useContext } from "react";
 import AppContext from "../../context/AppContext";
-import { useState } from "react";
 import "./FeaturedProduct.css";
-import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import "./ShowP.css"
-import Slider from "react-slick";
 import { Link } from "react-router-dom";
 
 const FeaturedProduct = () => {
   const { productType, addToCart } = useContext(AppContext);
-
- 
-
-  
-  const settings = {
-    dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
 
   return (
     <>
