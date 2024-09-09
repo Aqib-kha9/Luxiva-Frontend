@@ -3,10 +3,11 @@ import AppContext from "./AppContext";
 import axios from "axios";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useParams } from 'react-router-dom';
 
 const AppState = (props) => {
-  // const url = "http://localhost:8080/api";
-  const url = "https://luxiva-backend-api.onrender.com/api";
+  const url = "http://localhost:8080/api";
+  // const url = "https://luxiva-backend-api.onrender.com/api";
 
   const [products, setProducts] = useState([]);
   const [bannerProducts, setBannerProducts] = useState([]);
@@ -30,6 +31,7 @@ const AppState = (props) => {
         },
         withCredentials: true,
       });
+    
       // console.log(api.data.products);
       setProducts(api.data.products);
       profile();
@@ -417,7 +419,7 @@ const AppState = (props) => {
 
  // Delete Review
  const deleteReview = async (reviewProductId,reviewId) =>{
-  console.log(userId);
+  // console.log(userId);
   const api = await axios.delete(`${url}/product/${reviewProductId}/${reviewId}?userId=${userId}`,{
     headers:{
       "Content-Type":"Appliction/json",
@@ -442,6 +444,48 @@ const AppState = (props) => {
   });
  }
 
+
+ // Review ADD
+
+//  const  = async (productId,comment,rating,imgSrc)=>{
+//     const api = await axios.post(`${api}/product/${productId}`,{comment,rating,imgSrc},{
+//       headers:{
+//         "Content-Type":"Application/json",
+//         Auth: token
+//       },
+//       withCredentials: true,
+//     });
+//     console.log(api);
+//   }
+
+  const reviewAdd = async (productId,comment,rating,imgSrc,name) => {
+    console.log(productId);
+    const apiUrl = `${url}/product/${productId}/review`;
+    console.log(productId);
+    const response = await axios.post(apiUrl, 
+      { comment, rating, imgSrc, name },{
+      headers: {
+        "Content-Type": "Application/json",
+        Auth: token,
+      },
+      withCredentials: true,
+    });
+    
+    setReaload(!reload);
+    console.log("review added", response);
+    toast.success(response.data.message, {
+      position: "top-center",
+      autoClose: 1494,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
+    return response.data;
+  };
 
 
 
@@ -473,6 +517,7 @@ const AppState = (props) => {
         userAddress,
         deleteReview,
         reload,
+        reviewAdd,
       }}
     >
       {props.children}

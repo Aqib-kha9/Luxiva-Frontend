@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AppContext from "../../context/AppContext";
 import "./ShowP.css";
 import { Link } from "react-router-dom";
 
+
 const ShowProduct = () => {
-  const { products, addToCart } = useContext(AppContext);
+  const { products, addToCart} = useContext(AppContext);
+ 
   return (
     <>
       <h1 style={{ textAlign: "center" }}>Exclusive Products</h1>
@@ -68,6 +70,7 @@ const ShowProduct = () => {
           </div>
         ))}
       </div>
+      
     </>
   );
 };

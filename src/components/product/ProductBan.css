@@ -41,5 +41,6 @@
     border: 2px solid red;
     border-radius: 0px;
     margin-top: 1rem;
-    height: 3rem!important;
+    /* height: 3rem!important; */
+    padding: .7rem;
 }

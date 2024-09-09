@@ -5,11 +5,15 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
-
+import Loading from '../loader/Loading';
 const ProductBanner = () => {
 
 
-  const { bannerProducts } = useContext(AppContext);
+  const { bannerProducts,isLoading } = useContext(AppContext);
+
+  if (isLoading) {
+    return <Loading />;
+  }
   const settings = {
     dots: true,
     infinite: true,
@@ -32,9 +36,9 @@ const ProductBanner = () => {
                 <div className="side-containt">
                 <p>{product?.description}</p>
                 <h1>{product?.title}</h1>
-                <button className="btn btn-outline-danger">
+                <Link to={"/index"} className="btn btn-outline-danger">
                     Shop Now
-                </button>
+                </Link>
                 </div>
                 
               </div>

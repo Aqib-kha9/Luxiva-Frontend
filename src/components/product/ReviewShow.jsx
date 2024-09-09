@@ -8,13 +8,15 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import moment from 'moment';
+import AddReview from "./AddReview";
 
 const Review = ({ product }) => {
   const [productReview, setProductReview] = useState();
   const [showDescription, setShowDescription] = useState(true);
   const { user, deleteReview, reload } = useContext(AppContext);
-  // const url = "http://localhost:8080/api";
-  const url = "https://luxiva-backend-api.onrender.com/api";
+  const url = "http://localhost:8080/api";
+  // const url = "https://luxiva-backend-api.onrender.com/api";
 
 
 
@@ -50,7 +52,7 @@ const Review = ({ product }) => {
         </div>
 
         {showDescription ? (
-          <div className="content">
+          <div className="descriptionProduct mt-5">
             <p
               style={{
                 fontWeight: "600",
@@ -60,7 +62,12 @@ const Review = ({ product }) => {
             >
               {product?.description}
             </p>
+            <div  className="mt-5 toggle-buttons">
+            <hr /><hr /><hr />
+            </div>
+            
           </div>
+          
         ) : (
           <div className="content">
             <h5>
@@ -84,7 +91,7 @@ const Review = ({ product }) => {
                     className="d-flex"
                     style={{ justifyContent: "space-between" }}
                   >
-                    <span style={{ fontWeight: "bold" }}>{user?.name}</span>
+                    <span style={{ fontWeight: "bold" }}>{review?.name}</span>
                     <div className="d-flex align-items-center">
                       <Box sx={{ "& > legend": { mt: 2 } }}>
                         <Rating
@@ -109,18 +116,29 @@ const Review = ({ product }) => {
                   </div>
 
                   <span style={{ fontWeight: "600", color: "#687188" }}>
-                    {review?.createdAt}
+                    <i>{moment(review?.createdAt).format('MM-DD-YYYY')}</i>
                   </span>
 
                   <p style={{ fontWeight: "600", color: "#687188" }}>
                     {review?.comment}
                   </p>
                 </div>
+                
               </div>
+              
             ))}
+            
           </div>
         )}
+        
       </div>
+      <div className="addReviewTop" >
+        <div className="addReview">
+        <AddReview/>
+        </div>
+      
+      </div>
+      
     </>
   );
 };

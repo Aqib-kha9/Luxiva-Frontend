@@ -10,12 +10,12 @@ import AppContext from "../../context/AppContext";
 const ProductDetail = () => {
   const [product, setProduct] = useState();
   const [productReview, setProductReview] = useState();
-  const {user} = useContext(AppContext);
-  // const url = "http://localhost:8080/api";
-  const url = "https://luxiva-backend-api.onrender.com/api";
+  const { user } = useContext(AppContext);
+  const url = "http://localhost:8080/api";
+  // const url = "https://luxiva-backend-api.onrender.com/api";
 
   const { id } = useParams();
-  const {token,reload} = useContext(AppContext);
+  const { token, reload, addToCart } = useContext(AppContext);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -30,14 +30,14 @@ const ProductDetail = () => {
     };
 
     fetchProduct();
-  }, [id,reload]);
+  }, [id, reload]);
 
   useEffect(() => {
     const fetchProductReview = async () => {
       const api = await axios.get(`${url}/product/${id}/all`, {
         headers: {
           "Content-Type": "Application/json",
-          Auth: token
+          Auth: token,
         },
         withCredentials: true,
       });
@@ -46,7 +46,7 @@ const ProductDetail = () => {
     };
 
     fetchProductReview();
-  }, [id,token]);
+  }, [id, token]);
 
   return (
     <>
@@ -56,11 +56,13 @@ const ProductDetail = () => {
         </div>
         <div className="right">
           <h3>{product?.title}</h3>
-          <span style={{ color: "red", fontWeight: "bold" }}>
+          <span
+            style={{ color: "red", fontWeight: "bold", fontSize: "x-large" }}
+          >
             &#8377;{product?.price?.toLocaleString("en-IN")}
           </span>
-          &nbsp;
-          <span style={{ textDecoration: "line-through", fontSize: "small" }}>
+          &nbsp;{" "}
+          <span style={{ textDecoration: "line-through", fontSize: "large" }}>
             &#8377;{product?.oldPrice?.toLocaleString("en-IN")}
           </span>
           &nbsp; &nbsp;
@@ -68,19 +70,58 @@ const ProductDetail = () => {
           <p style={{ fontWeight: "600", color: "#687188" }}>
             {product?.shortDescription}
           </p>
-          <p><i className="fa-solid fa-shield-heart"></i> {product?.warranty}</p>
-          <p><i className="fa-solid fa-arrow-rotate-left"></i> {product?.returnPolicy}</p>
-          <p><i className="fa-solid fa-sack-dollar"></i> {product?.paymentMethod}</p>
-          <p>Color {product?.color}</p>
-          <p>Size {product?.size[0]},{product?.size[1]},{product?.size[2]}</p>
-          
+          <p>
+            <i
+              style={{ color: "#FF324D" }}
+              className="fa-solid fa-shield-heart"
+            ></i>{" "}
+            {product?.warranty}
+          </p>
+          <p>
+            <i
+              style={{ color: "#FF324D" }}
+              className="fa-solid fa-arrow-rotate-left"
+            ></i>{" "}
+            {product?.returnPolicy}
+          </p>
+          <p>
+            <i
+              style={{ color: "#FF324D" }}
+              className="fa-solid fa-sack-dollar"
+            ></i>{" "}
+            {product?.paymentMethod}
+          </p>
+          <span style={{ color: "#687188" }}>Color </span>
+          {product?.color.map((color, i) => (
+            <span
+              style={{ backgroundColor: color, color: color }}
+              className="colorArray"
+            ></span>
+          ))}
+          <br />
+          <span style={{ color: "#687188" }}>Size </span>
+          {product?.size.map((size, i) => (
+            <span className="sizeArray">{size}</span>
+          ))}
           <hr />
           <div className="btnbox">
-            <button className="btn btn-related btn-outline-danger ">
+            {/* <button className="btn btn-related btn-outline-danger ">
               Buy Now
-            </button>
-            <button className="btn btn-related btn-outline-dark">
-              Add To Cart
+            </button> */}
+            <button
+              onClick={() =>
+                addToCart(
+                  product._id,
+                  product.title,
+                  product.price,
+                  1,
+                  product.imgSrc
+                )
+              }
+              className="btn btn-related btn-outline-dark"
+            >
+              
+              Add To {" "} <i className="fa-solid fa-cart-plus"></i>
             </button>
           </div>
           <hr />

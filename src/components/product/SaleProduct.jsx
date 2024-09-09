@@ -20,7 +20,7 @@ const SaleProduct = () => {
                 <div className="side-container">
                     <p>{product?.description}</p>
                     <h2>{product?.title}</h2>
-                    <a href="">Shop Now</a>
+                    <Link to={"/index"}>Shop Now</Link>
                 </div>
                 
               </div>

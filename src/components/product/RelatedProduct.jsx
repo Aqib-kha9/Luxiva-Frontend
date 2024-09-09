@@ -3,7 +3,7 @@ import AppContext from '../../context/AppContext'
 import { Link } from 'react-router-dom'
 
 const RelatedProduct = ({category}) => {
-    const {products} = useContext(AppContext)
+    const {products,addToCart} = useContext(AppContext)
     const [relatedProduct, setRelatedProduct] = useState([])
     useEffect(() => {
       setRelatedProduct(products.filter((data)=>data?.category?.toLowerCase() == category?.toLowerCase()))
@@ -12,8 +12,7 @@ const RelatedProduct = ({category}) => {
 
   return (
     <>
-        <hr />
-        <h3 className='text-center mt-3'>Related Products</h3>
+        <h3 className='text-center '>Related Products</h3>
 
           <div className="container scrollbox" style={{justifyContent:"start",flexWrap: "nowrap",overflowY: "auto",gap:"1.5rem"}}>
           
