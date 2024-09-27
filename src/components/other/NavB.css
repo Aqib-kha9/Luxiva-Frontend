@@ -9,10 +9,16 @@
 }
 .nav_bar{
     display: flex;
-    width: 88%;
+    width: 95%;
     justify-content: space-between;
     align-items: center;
+    flex-direction: row;
 }
+.right_nav{
+    display: flex;
+    flex-direction: row;
+}
+
 .right_nav a{
     text-decoration: none;
     font-weight: bold;
@@ -31,9 +37,9 @@
 .search_bar{
     display: flex;
     align-items: center;
-    border: 2px solid rgba(109, 105, 105, 0.651);
-    border-radius: 1rem;
-    width: 25rem;
+    border: 2px solid black;
+    height: 2.5rem;
+    width: 35rem;
     padding: .3rem;
     transition: .3s ease-in;
 }
@@ -78,4 +84,27 @@
 
 .cart_a{
     left: 1rem;
+}
+
+
+
+.icons-div{
+    display: flex;
+
+}
+
+.brand-logo{
+    align-items: center;
+}
+.logo{
+    color: red;
+    position: relative;
+    transform: rotate(-40deg);
+    transform: skewX(-50deg);
+    transition: transform 10s ease-in;
+
+}
+.logo:hover{
+    color: black;
+    transform: rotate(2deg);
 }

@@ -66,3 +66,7 @@
 .colorArray:hover{
     cursor: pointer;
 }
+.rating-div{
+   display: flex;
+   justify-content: space-between;
+}

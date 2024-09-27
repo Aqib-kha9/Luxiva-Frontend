@@ -2,11 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import AppContext from "../../context/AppContext";
 import "./ShowP.css";
 import { Link } from "react-router-dom";
-
+import ProductDetail from "./ProductDetail.jsx";
+import Rating from "@mui/material/Rating";
+import Stack from "@mui/material/Stack";
 
 const ShowProduct = () => {
-  const { products, addToCart} = useContext(AppContext);
- 
+  const { products, addToCart,avrRating} = useContext(AppContext);
+  
+  
+
   return (
     <>
       <h1 style={{ textAlign: "center" }}>Exclusive Products</h1>
@@ -65,6 +69,20 @@ const ShowProduct = () => {
                   {product?.percentOff}% Off
                 </span>
                 {/* <span>{product?.reviews}</span> */}
+                <div className="d-flex align-items-center">
+                {avrRating ? (
+                  <Stack spacing={1}>
+                    <Rating
+                      size="small"
+                      name="half-rating-read"
+                      value={avrRating}
+                      precision={0.5}
+                      readOnly
+                    />
+                  </Stack>
+                ) : null}
+                <span>({product?.reviews?.length})</span>
+              </div>
               </div>
             </div>
           </div>

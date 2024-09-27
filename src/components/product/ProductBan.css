@@ -1,12 +1,12 @@
 .backgroundImg{
-    height: 80vh;
+    height: 50vh;
     display: flex;
     align-items: center;
 }
 
 .head-banner{
-    width: 90vw;
-    height: 80vh;
+    width: 100vw;
+    height: 50vh;
 }
 
 .slider-container{
@@ -14,11 +14,13 @@
     flex-direction: column;
 }
 .slick-next{
-    right: 10px!important;
-    left: 10px!important;
+    position: absolute;
+    left: 1rem;
+    opacity: 0;
 }
 .slick-prev{
-    right: 10px;
+    position: absolute;
+    opacity: 0;
 }
 
 .side-containt{

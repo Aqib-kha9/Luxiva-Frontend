@@ -17,6 +17,8 @@ const AppState = (props) => {
   const [productType, setProductType] = useState(false);
   const [testimonials, setTestimonials] = useState([]);
   const userId = user?._id;
+  
+  // console.log(avrRating);
   // console.log(userId);
 
   useEffect(() => {
@@ -119,8 +121,6 @@ const AppState = (props) => {
       setIsAuthenticated(true);
     }
   }, []);
-
-
 
 
   //register user
@@ -470,9 +470,6 @@ const AppState = (props) => {
     });
     return response.data;
   };
-
-
-
 
   return (
     <AppContext.Provider

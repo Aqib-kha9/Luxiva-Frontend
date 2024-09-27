@@ -2,6 +2,15 @@ import React, { useContext, useState } from "react";
 import "./NavB.css";
 import { Link, useNavigate } from "react-router-dom";
 import AppContext from "../../context/AppContext";
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
+import LogoutIcon from '@mui/icons-material/Logout';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+
+import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
+import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
+import DiamondOutlinedIcon from '@mui/icons-material/DiamondOutlined';
+
 
 const Navbar = () => {
   const { setFilteredData, products, logout, isAuthenticated,cart } =
@@ -23,42 +32,64 @@ const Navbar = () => {
       <div className="nav sticky-top">
         <div className="nav_bar">
           <Link to={"/"} className="left_bar">
+            <div className="d-flex brand-logo">
+            <DiamondOutlinedIcon sx={{ fontSize: 50 }} className="logo"></DiamondOutlinedIcon>
             <h3>LUXIVA</h3>
+            </div>
+            
           </Link>
           <form onSubmit={submitHandler} className="search_bar">
-            <span className="material-symbols-outlined">search</span>
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search Products"
+              placeholder="Search Product..."
             />
+            <span className="material-symbols-outlined">search</span>
           </form>
           <div className="right_nav">
             {isAuthenticated && (
               <>
-                <Link to={"/profile"}>Profile</Link>
-                <Link to={"/cart"} className=" position-relative cart_a fa-solid fa-cart-shopping" style={{marginRight:"3rem"}}>
+                <div className="icons-div">
+                <Link to={"/"}><HomeOutlinedIcon sx={{ fontSize: 30 }}></HomeOutlinedIcon></Link>
+                {/* <span className="hover">Home</span> */}
                 
-                  <span className="position-relative top-50 start-50 translate-middle badge rounded-pill bg-danger">
+                </div>
+                <div>
+                <Link to={"/profile"} ><Person2OutlinedIcon sx={{ fontSize: 30 }}></Person2OutlinedIcon></Link>
+                {/* <span className="hover">Profile</span> */}
+                </div>
+               <div>
+               <Link to={"/cart"}>
+                <ShoppingCartOutlinedIcon/>
+                
+                  <span className="position-relative top-5 start-5 translate-middle badge rounded-pill bg-danger">
                     {cart?.items?.length}
-                    <span className="visually-hidden">unread messages</span>
+                    <span className="visually-hidden"></span>
                   </span>
                 </Link>
-                <a
+               </div>
+               <div>
+               <a className="logout"
                   onClick={() => {
                     logout();
                     Navigate("/");
                   }}
                 >
-                  Logout
+                  <LogoutIcon></LogoutIcon>
                 </a>
+               </div>
+
+                
+
+
               </>
             )}
             {!isAuthenticated && (
               <>
-                <Link to={"/login"}>Login</Link>
-                <Link to={"/register"}>Register</Link>
+                <Link to={"/"}><HomeOutlinedIcon sx={{ fontSize: 27}}></HomeOutlinedIcon></Link>
+                <Link to={"/login"}><LoginOutlinedIcon/></Link>
+                <Link to={"/register"}><HowToRegOutlinedIcon/></Link>
               </>
             )}
           </div>
@@ -81,3 +112,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+// fa-cart-shopping
+// style={{marginRight:"3rem"}}

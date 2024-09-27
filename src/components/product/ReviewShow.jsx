@@ -10,6 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import moment from 'moment';
 import AddReview from "./AddReview";
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 
 const Review = ({ product }) => {
   const [productReview, setProductReview] = useState();
@@ -108,7 +109,7 @@ const Review = ({ product }) => {
                             deleteReview(product._id, review._id);
                         }}
                       >
-                        <DeleteIcon fontSize="inherit" />
+                        <CloseOutlinedIcon/>
                       </IconButton>
                     </div>
                   </div>

@@ -6,14 +6,18 @@ import "./DetailP.css";
 import RelatedProduct from "./RelatedProduct";
 import Review from "./ReviewShow";
 import AppContext from "../../context/AppContext";
+import Rating from "@mui/material/Rating";
+import Stack from "@mui/material/Stack";
 
 const ProductDetail = () => {
   const [product, setProduct] = useState();
   const [productReview, setProductReview] = useState();
-  const { user,url } = useContext(AppContext);
-  
+  const { user, url } = useContext(AppContext);
+  const [avrRating, setAvrRating] = useState();
+ 
   const { id } = useParams();
   const { token, reload, addToCart } = useContext(AppContext);
+  console.log(avrRating)
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -31,6 +35,22 @@ const ProductDetail = () => {
   }, [id, reload]);
 
   useEffect(() => {
+    const calculateAverageRating = async () => {
+      let totalRating = 0;
+      productReview.forEach(review => {
+        totalRating += review.rating;
+      });
+      const average = totalRating / productReview.length || 0; // Prevent division by zero
+      setAvrRating(average); // Update context
+      console.log("Average Rating:", average);
+    };
+    
+    if (productReview?.length > 0) {
+      calculateAverageRating();
+    }
+  }, [productReview, setAvrRating]); // Recalculate when productReview changes
+
+  useEffect(() => {
     const fetchProductReview = async () => {
       const api = await axios.get(`${url}/product/${id}/all`, {
         headers: {
@@ -42,7 +62,6 @@ const ProductDetail = () => {
       // console.log(api.data.getAllReviews);
       setProductReview(api.data.getAllReviews);
     };
-
     fetchProductReview();
   }, [id, token]);
 
@@ -54,17 +73,42 @@ const ProductDetail = () => {
         </div>
         <div className="right">
           <h3>{product?.title}</h3>
-          <span
-            style={{ color: "red", fontWeight: "bold", fontSize: "x-large" }}
-          >
-            &#8377;{product?.price?.toLocaleString("en-IN")}
-          </span>
-          &nbsp;{" "}
-          <span style={{ textDecoration: "line-through", fontSize: "large" }}>
-            &#8377;{product?.oldPrice?.toLocaleString("en-IN")}
-          </span>
-          &nbsp; &nbsp;
-          <span style={{ color: "green" }}>{product?.percentOff}% Off</span>
+          <div className="rating-div">
+            <div className="d-flex">
+              <span
+                style={{
+                  color: "red",
+                  fontWeight: "bold",
+                  fontSize: "x-large",
+                }}
+              >
+                &#8377;{product?.price?.toLocaleString("en-IN")}
+              </span>
+              &nbsp;{" "}
+              <span
+                style={{ textDecoration: "line-through", fontSize: "large" }}
+              >
+                &#8377;{product?.oldPrice?.toLocaleString("en-IN")}
+              </span>
+              &nbsp; &nbsp;
+              <span style={{ color: "green" }}>{product?.percentOff}% Off</span>
+              </div>
+              <div className="d-flex align-items-center">
+                {avrRating ? (
+                  <Stack spacing={1}>
+                    <Rating
+                      name="half-rating-read"
+                      value={avrRating}
+                      precision={0.5}
+                      readOnly
+                    />
+                  </Stack>
+                ) : null}
+                <span>({product?.reviews?.length})</span>
+              </div>
+            
+          </div>
+
           <p style={{ fontWeight: "600", color: "#687188" }}>
             {product?.shortDescription}
           </p>
@@ -118,8 +162,7 @@ const ProductDetail = () => {
               }
               className="btn btn-related btn-outline-dark"
             >
-              
-              Add To {" "} <i className="fa-solid fa-cart-plus"></i>
+              Add To <i className="fa-solid fa-cart-plus"></i>
             </button>
           </div>
           <hr />
@@ -140,6 +183,7 @@ const ProductDetail = () => {
       </div>
       <Review product={product} />
       <RelatedProduct category={product?.category} />
+      
     </>
   );
 };
