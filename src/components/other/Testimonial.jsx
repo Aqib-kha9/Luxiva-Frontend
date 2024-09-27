@@ -7,7 +7,7 @@ const Testimonial = () => {
   const { testimonials } = useContext(AppContext);
 
   const settings = {
-    dots: false,
+    dots: true,
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -18,8 +18,6 @@ const Testimonial = () => {
   };
   return (
     <>
-      
-
       
         <div className="testimonial-parent slider-container">
         <h3 style={{ textAlign: "center",marginBottom:"1.5rem", fontWeight:"bold"}}>Our Client Say!</h3>

@@ -27,8 +27,8 @@ const Cart = () => {
     <>
       {cart?.items?.length == 0 ? (
         <>
-          <div className="cart-container mt-5">
-            <Link to={"/"} className="btn btn-outline-danger cart-btn ">
+          <div className="cart-container mt-5 mb-5">
+            <Link to={"/exclusivDeals"} className="btn btn-outline-danger cart-btn ">
               Your Cart is empty Continue Shopping....
             </Link>
           </div>
@@ -84,7 +84,7 @@ const Cart = () => {
               </div>
             ))}
           </div>
-          <div className="cart-total d-flex">
+          <div className="cart-total d-flex mb-5">
             <div className="cart-footer" style={{ width: "88vw" }}>
               <hr />
               <div className="inner-cart-i d-flex flex-row">

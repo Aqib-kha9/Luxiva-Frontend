@@ -1,10 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import AppContext from "../../context/AppContext";
+import axios from "axios";
 import { Link } from "react-router-dom";
+import Stack from "@mui/material/Stack";
+import Rating from "@mui/material/Rating";
 
 const RelatedProduct = ({category}) => {
-  const { products, addToCart } = useContext(AppContext);
+  const { products, addToCart,url } = useContext(AppContext);
   const [relatedProduct, setRelatedProduct] = useState([]);
+  const [reviewsData, setReviewsData] = useState({}); // To store reviews for each product
   useEffect(() => {
     setRelatedProduct(
       products.filter(
@@ -12,6 +16,39 @@ const RelatedProduct = ({category}) => {
       )
     );
   }, [category, products]);
+
+  
+  // .length
+  useEffect(() => {
+    const fetchReviews = async () => {
+      const reviewsMap = {};
+      for (let product of products) {
+        if (product?.reviews?.length) {
+          try {
+            const response = await axios.get(
+              `${url}/product/${product._id}/all`, // Assuming this endpoint fetches all reviews for a given product
+              { params: { reviewIds: product.reviews } } // Pass the review IDs to get the details
+            );
+
+            // Set reviews correctly based on the response structure
+            reviewsMap[product._id] = response.data.getAllReviews; // Access getAllReviews from the response data
+          } catch (error) {
+            console.error(
+              "Error fetching reviews for product:",
+              product._id,
+              error
+            );
+          }
+        }
+      }
+      setReviewsData(reviewsMap);
+    };
+
+    if (products?.length) {
+      fetchReviews();
+    }
+  }, [products]);
+
 
   return (
     <>
@@ -26,7 +63,19 @@ const RelatedProduct = ({category}) => {
           gap: "1.5rem",
         }}
       >
-        {relatedProduct?.map((product) => (
+        {relatedProduct?.map((product) =>{
+          // Get the reviews for the current product, or an empty array if undefined
+          const reviews = reviewsData[product._id] || [];
+
+          // Calculate the average rating if there are reviews
+          const totalRating = reviews.reduce(
+            (sum, review) => sum + review.rating,
+            0
+          );
+          const averageRating =
+            reviews.length > 0 ? totalRating / reviews.length : 0;
+        return(
+
           <div key={product._id} className="card-body-featured">
             <div className="card">
               <div>
@@ -81,8 +130,8 @@ const RelatedProduct = ({category}) => {
                 <span style={{ color: "green" }}>
                   {product?.percentOff}% Off
                 </span>
-                {/* <div className="d-flex align-items-center">
-                  {avrRating ? (
+                <div className="d-flex align-items-center">
+                  {averageRating ? (
                     <Stack spacing={1}>
                       <Rating
                         size="small"
@@ -92,13 +141,15 @@ const RelatedProduct = ({category}) => {
                         readOnly
                       />
                     </Stack>
-                  ) : null}
+                  ) : (
+                    <span style={{fontSize:"small"}}>No Reviews Yet</span>
+                  )}
                   <span>({product?.reviews?.length})</span>
-                </div> */}
+                </div>
               </div>
             </div>
           </div>
-        ))}
+)})}
       </div>
     </>
   );

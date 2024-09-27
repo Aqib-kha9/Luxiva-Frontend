@@ -2,7 +2,13 @@ body::-webkit-scrollbar{
     display: none;
 }
 
+
 /* body{
   background-color: black;
   color: white;
 } */
+
+body{
+  width: 100vw;
+  height: 100vh;
+}

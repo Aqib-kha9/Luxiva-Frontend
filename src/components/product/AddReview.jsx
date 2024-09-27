@@ -51,47 +51,47 @@ const AddReview = () => {
                 required
             />
           </Box>
-          <div class="form-floating">
+          <div className="form-floating">
             <textarea
             name="comment"
             value={formData.comment}
             onChange={onChangeHandler}
             required
-              class="form-control"
+              className="form-control"
               placeholder="Leave a comment here"
               id="floatingTextarea2"
               style={{ height: " 100px" }}
             ></textarea>
-            <label for="floatingTextarea2">Your Review *</label>
+            <label htmlFor="floatingTextarea2">Your Review *</label>
           </div>
 
-          <div class="row g-2">
-            <div class="col-md">
-              <div class="form-floating">
+          <div className="row g-2">
+            <div className="col-md">
+              <div className="form-floating">
                 <input
                 name="imgSrc"
                 value={formData.imgSrc}
                 onChange={onChangeHandler}
                 required
-                  class="form-control"
+                  className="form-control"
                   placeholder="Leave a comment here"
                   id="floatingTextarea"
                 ></input>
-                <label for="floatingTextarea">Image Link</label>
+                <label htmlFor="floatingTextarea">Image Link</label>
               </div>
             </div>
-            <div class="col-md">
-              <div class="form-floating">
+            <div className="col-md">
+              <div className="form-floating">
                 <input
                 name="name"
                 value={formData.name}
                 onChange={onChangeHandler}
                 required
-                  class="form-control"
+                  className="form-control"
                   placeholder="Leave a comment here"
                   id="floatingTextarea"
                 ></input>
-                <label for="floatingTextarea">User Name</label>
+                <label htmlFor="floatingTextarea">User Name</label>
               </div>
             </div>
           </div>

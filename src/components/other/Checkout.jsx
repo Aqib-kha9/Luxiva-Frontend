@@ -27,7 +27,7 @@ const Checkout = () => {
   return (
     <>
       <h3 style={{ textAlign: "center", marginTop: "2rem" }}>Order Summary</h3>
-      <div className="cart-container checkout">
+      <div className="cart-container checkout mb-5">
         <div className="product-details">
           <h5 style={{ marginTop: "1rem",textAlign:"center",marginBottom:"1rem"}}>
             Product Details
@@ -90,9 +90,9 @@ const Checkout = () => {
               <button className="btn btn-outline-dark btn1">
                 Total Price: &#8377; {price?.toLocaleString("en-IN")}{" "}
               </button>
-              <button className="btn btn-outline-danger btn1">
+              <Link to={"/orderConfirmation"} className="btn btn-outline-danger btn1">
                 Proceed To Pay
-              </button>
+              </Link>
             </div>
           </div>
 

@@ -36,7 +36,7 @@ const ProductBanner = () => {
                 <div className="side-containt">
                 <p>{product?.description}</p>
                 <h1>{product?.title}</h1>
-                <Link to={"/index"} className="btn btn-outline-danger">
+                <Link to={"/exclusivDeals"} className="btn btn-outline-danger">
                     Shop Now
                 </Link>
                 </div>

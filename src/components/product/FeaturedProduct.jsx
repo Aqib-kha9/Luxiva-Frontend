@@ -1,12 +1,50 @@
 import React, { useContext } from "react";
 import AppContext from "../../context/AppContext";
+import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
 import "./FeaturedProduct.css";
 import 'swiper/css';
 import "./ShowP.css"
 import { Link } from "react-router-dom";
+import Rating from "@mui/material/Rating";
+import Stack from "@mui/material/Stack";
 
 const FeaturedProduct = () => {
   const { productType, addToCart } = useContext(AppContext);
+  const { products, url } = useContext(AppContext);
+  const [reviewsData, setReviewsData] = useState({}); // To store reviews for each product
+  // .length
+  useEffect(() => {
+    const fetchReviews = async () => {
+      const reviewsMap = {};
+      for (let product of products) {
+        if (product?.reviews?.length) {
+          try {
+            const response = await axios.get(
+              `${url}/product/${product._id}/all`, // Assuming this endpoint fetches all reviews for a given product
+              { params: { reviewIds: product.reviews } } // Pass the review IDs to get the details
+            );
+
+            // Set reviews correctly based on the response structure
+            reviewsMap[product._id] = response.data.getAllReviews; // Access getAllReviews from the response data
+          } catch (error) {
+            console.error(
+              "Error fetching reviews for product:",
+              product._id,
+              error
+            );
+          }
+        }
+      }
+      setReviewsData(reviewsMap);
+    };
+
+    if (products?.length) {
+      fetchReviews();
+    }
+  }, [products]);
+
 
   return (
     <>
@@ -20,7 +58,20 @@ const FeaturedProduct = () => {
       )}
         <div className="container scrollbox" style={{justifyContent:"start",flexWrap: "nowrap",overflowY: "auto",gap:"1.5rem"}}>
           {productType?.length > 0 ? (
-            productType?.map((product) => (
+            productType?.map((product) =>{ 
+              // Get the reviews for the current product, or an empty array if undefined
+          const reviews = reviewsData[product._id] || [];
+
+          // Calculate the average rating if there are reviews
+          const totalRating = reviews.reduce(
+            (sum, review) => sum + review.rating,
+            0
+          );
+          const averageRating =
+            reviews.length > 0 ? totalRating / reviews.length : 0;
+
+              return(
+
               <div key={product._id} className="card-body-featured">
                 
                   
@@ -84,11 +135,28 @@ const FeaturedProduct = () => {
                       <span style={{ color: "green" }}>
                         {product?.percentOff}% Off
                       </span>
+                      <div className="d-flex align-items-center">
+                    {reviews.length ? (
+                      <Stack spacing={1}>
+                        <Rating
+                          size="small"
+                          name="half-rating-read"
+                          value={averageRating}
+                          precision={0.5}
+                          readOnly
+                        />
+                      </Stack>
+                    ) : (
+                      <span style={{fontSize:"small"}}>No Reviews Yet</span>
+                    )}
+                    <span>({reviews.length})</span>
+                  </div>
                     </div>
+                    
                   </div>
                   
               </div>
-            ))
+            )})
           ) : (
             <p>No Featured Products Available</p>
           )}

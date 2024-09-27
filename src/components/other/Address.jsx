@@ -42,7 +42,7 @@ const Address = () => {
 
   return (
     <>
-      <div className="parent-register mt-5 row">
+      <div className="parent-register mt-5 row mb-5">
         <div className="container_register shipping-container col-8">
           <form onSubmit={submitHandler}>
             <h3>Shipping Address</h3>

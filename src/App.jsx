@@ -20,8 +20,8 @@ import ExtraInfo from "./components/other/ExtraInfo";
 import NewsLetter from "./components/other/NewsLetter";
 import FooterLinks from "./components/footer/FooterLinks";
 import AddProduct from "./components/Admin/AddProduct"
-import Loading from "./components/loader/Loading";
-import axios from "axios";
+
+import OrderConfirmation from "./components/other/OrderConfirmation";
 
 const App = () => {
   // const [isLoading, setIsLoading] = useState(false);
@@ -80,6 +80,8 @@ const App = () => {
         <Route path="/shipping" element={<Address />}></Route>
         <Route path="/checkout" element={<Checkout />}></Route>
         <Route path="/addproduct" element={<AddProduct/>}></Route>
+        <Route path="/exclusivDeals" element={<ShowProduct/>}></Route>
+        <Route path="/orderConfirmation" element={<OrderConfirmation/>}></Route>
       </Routes>
       <NewsLetter />
       <FooterLinks />

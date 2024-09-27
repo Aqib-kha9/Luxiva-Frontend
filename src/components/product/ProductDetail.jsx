@@ -6,13 +6,13 @@ import "./DetailP.css";
 import RelatedProduct from "./RelatedProduct";
 import Review from "./ReviewShow";
 import AppContext from "../../context/AppContext";
-import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
+import Rating from "@mui/material/Rating";
 
 const ProductDetail = () => {
   const [product, setProduct] = useState();
   const [productReview, setProductReview] = useState();
-  const { user, url } = useContext(AppContext);
+  const { url } = useContext(AppContext);
   const [avrRating, setAvrRating] = useState();
  
   const { id } = useParams();
@@ -67,7 +67,7 @@ const ProductDetail = () => {
 
   return (
     <>
-      <div className="Detail">
+      <div className="Detail" key={product?._id}>
         <div className="left">
           <img src={product?.imgSrc} alt="" />
         </div>
@@ -182,7 +182,8 @@ const ProductDetail = () => {
         </div>
       </div>
       <Review product={product} />
-      <RelatedProduct category={product?.category} />
+      <RelatedProduct category={product?.category}/>
+
       
     </>
   );
